@@ -23,4 +23,28 @@ class PurchasesAdapter {
         }).then(res => res.json())
     }
 
+    updatePurchase(newPurchaseTitle, newPurchasePrice, newPurchaseDescription, newPurchaseImage, id) {
+        const purchase = {
+            title: newPurchaseTitle,
+            price: newPurchasePrice,
+            description: newPurchaseDescription,
+            image: newPurchaseImage
+        }
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ purchase }),
+        }).then(res => res.json())
+    }
+
+    deletePurchase(id) {
+        fetch(`${this.baseUrl}/${id}`, {
+          method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(response => {return response})
+    }
+
 }
