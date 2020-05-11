@@ -1,4 +1,4 @@
-class PurchasesController < ApplicationController
+class Api::V1::PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :update, :destroy]
 
   def index
