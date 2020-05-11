@@ -1,5 +1,23 @@
 body {
 	background: #04A1BF;
-	text-align: center;
 	font-family: 'Open Sans', sans-serif;
+}
+
+#new-purchase-container {
+	text-align: center;
+}
+
+#purchases-container {
+	display: flex;
+    flex-flow: row wrap;
+    max-width: 1500px;
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 325px;
+    height: 325px;
+    margin: 40px 10px;
+    padding: 8px;
+    text-align: center;
 }
