@@ -103,6 +103,7 @@ class Purchases {
             const closableButton = `<br></br> <button class="closable" onClick={closePurchase(e)}> Close </button>`
             purchaseInnerDisplay.innerHTML += commentForm
             purchaseInnerDisplay.innerHTML += closableButton
+            console.log('testing', this.purchases)
             const specificPurchaseComments = this.purchases.filter(purchase => purchase.id === id)[0].comments
             specificPurchaseComments.forEach(function (specificComment) {
                 const elementForComment = document.createElement("li")

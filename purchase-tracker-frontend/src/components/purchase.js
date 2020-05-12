@@ -7,7 +7,6 @@ class Purchase {
         this.description = purchaseJSON.description
         this.image = purchaseJSON.image
         this.comments = purchaseJSON.comments
-        this.likes = 0
     }
 
     renderCard() {

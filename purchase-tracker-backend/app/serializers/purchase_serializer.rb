@@ -1,5 +1,4 @@
-class PurchaseSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :title, :price, :description, :image
+class PurchaseSerializer < ActiveModel::Serializer
+  attributes :id, :title, :price, :description, :image
   has_many :comments
 end
