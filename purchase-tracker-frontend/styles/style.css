@@ -15,10 +15,22 @@ body {
     font-size: 20px;
 }
 
+#purchase-single-display {
+    position: fixed;
+    bottom: 8px;
+    left: 16px;
+    font-size: 18px;
+    height: auto;
+    width: auto;
+    font-size: 15px;
+}
+
 #new-purchase-container {
     float: left;
     background: darkslategray;
-    padding: 40px;
+    padding: 30px;
+    height: auto;
+    width: auto;
 }
 
 #purchases-container {

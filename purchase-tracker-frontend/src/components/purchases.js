@@ -81,8 +81,8 @@ class Purchases {
             purchaseInnerDisplay.innerHTML += '<h1>Currently Viewing</h1>'
             let superPurchaseImage = document.createElement("img")
             superPurchaseImage.src = (card.parentElement.children[0].src)
-            superPurchaseImage.setAttribute("width", "250")
-            superPurchaseImage.setAttribute("height", "250")
+            superPurchaseImage.setAttribute("width", "200")
+            superPurchaseImage.setAttribute("height", "200")
             purchaseInnerDisplay.append(superPurchaseImage)
             purchaseInnerDisplay.appendChild(superPurchaseImage)
             let superPurchaseTitle = document.createElement("h2")
