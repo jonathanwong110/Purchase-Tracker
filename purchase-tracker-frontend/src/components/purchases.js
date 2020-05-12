@@ -18,15 +18,7 @@ class Purchases {
         this.purchasesContainer.addEventListener('dblclick', this.handlePurchaseClick.bind(this))
         this.purchasesContainer.addEventListener('blur', this.updatePurchase.bind(this), true)
         this.purchasesContainer.addEventListener('click', this.deletePurchase.bind(this), true)
-    }
-
-    handlePurchaseClick(e) {
-        const card = e.target
-        if (card.attributes && card.attributes.class && card.attributes.class.value === "selectable") {
-            card.contentEditable = true
-            card.focus()
-            card.classList.add('editable')
-        }
+        this.purchasesContainer.addEventListener('click', this.showPurchase.bind(this), true)
     }
 
     createPurchase(e) {
@@ -43,6 +35,15 @@ class Purchases {
             this.newPurchaseImage.value = ""
             this.render()
         })
+    }
+
+    handlePurchaseClick(e) {
+        const card = e.target
+        if (card.attributes && card.attributes.class && card.attributes.class.value === "selectable") {
+            card.contentEditable = true
+            card.focus()
+            card.classList.add('editable')
+        }
     }
 
     updatePurchase(e) {
@@ -64,6 +65,52 @@ class Purchases {
             const id = card.dataset.purchaseId
             this.adapter.deletePurchase(id)
             card.parentElement.remove()
+        }
+    }
+
+    showPurchase(e) {
+        e.preventDefault()
+        const card = e.target
+        if (card.attributes && card.attributes.class && card.attributes.class.value === "viewable") {
+            const id = parseInt(card.dataset.purchaseId)
+            const purchaseOuterDisplay = document.getElementById('purchase-single-display')
+            purchaseOuterDisplay.innerHTML = ""
+            const purchaseInnerDisplay = document.createElement("div")
+            purchaseInnerDisplay.setAttribute("class", "purchase-show")
+            purchaseOuterDisplay.appendChild(purchaseInnerDisplay)
+            purchaseInnerDisplay.innerHTML += '<h1>Currently Viewing</h1>'
+            let superPurchaseImage = document.createElement("img")
+            superPurchaseImage.src = (card.parentElement.children[0].src)
+            superPurchaseImage.setAttribute("width", "250")
+            superPurchaseImage.setAttribute("height", "250")
+            purchaseInnerDisplay.append(superPurchaseImage)
+            purchaseInnerDisplay.appendChild(superPurchaseImage)
+            let superPurchaseTitle = document.createElement("h2")
+            let superPurchaseTitleText = document.createTextNode(card.parentElement.children[1].innerHTML)
+            superPurchaseTitle.appendChild(superPurchaseTitleText)
+            purchaseInnerDisplay.appendChild(superPurchaseTitle)
+            let superPurchasePrice = document.createElement("h3")
+            let superPurchasePriceText = document.createTextNode(card.parentElement.children[2].innerHTML)
+            superPurchasePrice.appendChild(superPurchasePriceText)
+            purchaseInnerDisplay.appendChild(superPurchasePrice)
+            let superPurchaseDescription = document.createElement("h3")
+            let superPurchaseDescriptionText = document.createTextNode(card.parentElement.children[3].innerHTML)
+            superPurchaseDescription.appendChild(superPurchaseDescriptionText)
+            purchaseInnerDisplay.appendChild(superPurchaseDescription)
+            const commentForm = `<div id='card-comments'>
+            <h2>Comments</h2>
+            </div>`
+            const closableButton = `<br></br> <button class="closable" onClick={closePurchase(e)}> Close </button>`
+            purchaseInnerDisplay.innerHTML += commentForm
+            purchaseInnerDisplay.innerHTML += closableButton
+            const specificPurchaseComments = this.purchases.filter(purchase => purchase.id === id)[0].comments
+            specificPurchaseComments.forEach(function (specificComment) {
+                const elementForComment = document.createElement("li")
+                const commentDetail = document.createTextNode(specificComment.content)
+                elementForComment.appendChild(commentDetail)
+                const spaceForComment = document.getElementById('card-comments')
+                spaceForComment.append(elementForComment)
+            })
         }
     }
 
