@@ -6,9 +6,9 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-.heading, .input-field {
+/* .heading, .input-field {
     color: white;
-}
+} */
 
 .first {
     color: white;
@@ -27,7 +27,7 @@ body {
 
 #new-purchase-container {
     float: left;
-    background: darkslategray;
+    /* background: darkslategray; */
     padding: 30px;
     height: auto;
     width: auto;

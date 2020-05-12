@@ -78,7 +78,7 @@ class Purchases {
             const purchaseInnerDisplay = document.createElement("div")
             purchaseInnerDisplay.setAttribute("class", "purchase-show")
             purchaseOuterDisplay.appendChild(purchaseInnerDisplay)
-            purchaseInnerDisplay.innerHTML += '<h1>Currently Viewing</h1>'
+            purchaseInnerDisplay.innerHTML += '<h2>Currently Viewing</h2>'
             let superPurchaseImage = document.createElement("img")
             superPurchaseImage.src = (card.parentElement.children[0].src)
             superPurchaseImage.setAttribute("width", "200")
@@ -98,15 +98,14 @@ class Purchases {
             superPurchaseDescription.appendChild(superPurchaseDescriptionText)
             purchaseInnerDisplay.appendChild(superPurchaseDescription)
             const commentForm = `<div id='card-comments'>
-            <h2>Comments</h2>
+            <h3>Comments</h3>
             </div>`
             const closableButton = `<br></br> <button class="closable" onClick={closePurchase(e)}> Close </button>`
             purchaseInnerDisplay.innerHTML += commentForm
             purchaseInnerDisplay.innerHTML += closableButton
-            console.log('testing', this.purchases)
             const specificPurchaseComments = this.purchases.filter(purchase => purchase.id === id)[0].comments
             specificPurchaseComments.forEach(function (specificComment) {
-                const elementForComment = document.createElement("li")
+                const elementForComment = document.createElement("p")
                 const commentDetail = document.createTextNode(specificComment.content)
                 elementForComment.appendChild(commentDetail)
                 const spaceForComment = document.getElementById('card-comments')
