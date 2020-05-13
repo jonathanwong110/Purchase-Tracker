@@ -8,6 +8,7 @@ class Purchases {
 
     initiBindingsAndEventListeners() {
         this.purchasesContainer = document.getElementById('purchases-container')
+        this.purchaseSingleDisplay = document.getElementById('purchase-single-display')
         this.newPurchaseTitle = document.getElementById('new-purchase-title')
         this.newPurchasePrice = document.getElementById('new-purchase-price')
         this.newPurchaseDescription = document.getElementById('new-purchase-description')
@@ -19,6 +20,16 @@ class Purchases {
         this.purchasesContainer.addEventListener('blur', this.updatePurchase.bind(this), true)
         this.purchasesContainer.addEventListener('click', this.deletePurchase.bind(this), true)
         this.purchasesContainer.addEventListener('click', this.showPurchase.bind(this), true)
+        this.purchaseSingleDisplay.addEventListener('click', this.closePurchase.bind(this), true)
+    }
+
+    handlePurchaseClick(e) {
+        const card = e.target
+        if (card.attributes && card.attributes.class && card.attributes.class.value === "selectable") {
+            card.contentEditable = true
+            card.focus()
+            card.classList.add('editable')
+        }
     }
 
     createPurchase(e) {
@@ -35,15 +46,6 @@ class Purchases {
             this.newPurchaseImage.value = ""
             this.render()
         })
-    }
-
-    handlePurchaseClick(e) {
-        const card = e.target
-        if (card.attributes && card.attributes.class && card.attributes.class.value === "selectable") {
-            card.contentEditable = true
-            card.focus()
-            card.classList.add('editable')
-        }
     }
 
     updatePurchase(e) {
@@ -65,6 +67,15 @@ class Purchases {
             const id = card.dataset.purchaseId
             this.adapter.deletePurchase(id)
             card.parentElement.remove()
+        }
+    }
+
+    closePurchase(e) {
+        e.preventDefault()
+        const card = e.target
+        if (card.attributes.class.value === "closable") {
+            const purchaseOuterDisplay = document.getElementById('purchase-single-display')
+            purchaseOuterDisplay.innerHTML = ""
         }
     }
 
@@ -116,11 +127,11 @@ class Purchases {
 
     fetchAndLoadPurchases() {
         this.adapter.getPurchases().then(purchases => {
-            purchases.forEach(purchase => this.purchases.push(new Purchase(purchase)))
+            purchases.sort((a, b) => b.id - a.id).forEach(purchase => this.purchases.push(new Purchase(purchase)))
         })
-        .then(() => {
-            this.render()
-        })
+            .then(() => {
+                this.render()
+            })
     }
 
     render() {

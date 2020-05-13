@@ -6,37 +6,37 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-/* .heading, .input-field {
-    color: white;
-} */
-
 .first {
-    color: white;
     font-size: 20px;
 }
 
 #purchase-single-display {
+    padding: 30px;
     position: fixed;
     bottom: 8px;
     left: 16px;
-    font-size: 18px;
-    height: auto;
-    width: auto;
     font-size: 15px;
 }
 
 #new-purchase-container {
-    float: left;
-    /* background: darkslategray; */
     padding: 30px;
-    height: auto;
-    width: auto;
+    position: fixed;
+    max-height: 150px;
+    max-width: 275px;
+    border: 30px;
+    top: 8px;
+    left: 16px;
 }
 
 #purchases-container {
+    float: right;
 	display: flex;
     flex-flow: row wrap;
     max-width: 1500px;
+}
+
+#purchases-content {
+    padding-left: 300px;
 }
 
 .card {
