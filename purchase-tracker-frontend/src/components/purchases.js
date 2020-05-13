@@ -54,7 +54,7 @@ class Purchases {
         card.classList.remove('editable')
         const newPurchaseTitle = card.querySelector('h2').innerHTML
         const newPurchasePrice = card.querySelector('h3').innerHTML
-        const newPurchaseDescription = card.querySelector('p').innerHTML
+        const newPurchaseDescription = card.querySelector('b').innerHTML
         const newPurchaseImage = card.querySelector('img').src
         const id = card.dataset.id
         this.adapter.updatePurchase(newPurchaseTitle, newPurchasePrice, newPurchaseDescription, newPurchaseImage, id)
@@ -108,10 +108,12 @@ class Purchases {
             let superPurchaseDescriptionText = document.createTextNode(card.parentElement.children[3].innerHTML)
             superPurchaseDescription.appendChild(superPurchaseDescriptionText)
             purchaseInnerDisplay.appendChild(superPurchaseDescription)
-            const commentForm = `<div id='card-comments'>
+            const commentHeading = `<div id='card-comments-location'>
             <h3>Comments</h3>
             </div>`
+            const commentForm = `<input type="text" name="comment-title" id="new-comment-content" placeholder="Submit a Comment">`
             const closableButton = `<br></br> <button class="closable" onClick={closePurchase(e)}> Close </button>`
+            purchaseInnerDisplay.innerHTML += commentHeading
             purchaseInnerDisplay.innerHTML += commentForm
             purchaseInnerDisplay.innerHTML += closableButton
             const specificPurchaseComments = this.purchases.filter(purchase => purchase.id === id)[0].comments
@@ -119,11 +121,12 @@ class Purchases {
                 const elementForComment = document.createElement("p")
                 const commentDetail = document.createTextNode(specificComment.content)
                 elementForComment.appendChild(commentDetail)
-                const spaceForComment = document.getElementById('card-comments')
+                const spaceForComment = document.getElementById('card-comments-location')
                 spaceForComment.append(elementForComment)
             })
         }
     }
+
 
     fetchAndLoadPurchases() {
         this.adapter.getPurchases().then(purchases => {
