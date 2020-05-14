@@ -15,7 +15,7 @@ class Api::V1::PurchasesController < ApplicationController
     @purchase = Purchase.new(purchase_params)
 
     if @purchase.save
-      render json: @purchase, status: :created, location: @purchase
+      render json: @purchase, status: :created
     else
       render json: @purchase.errors, status: :unprocessable_entity
     end

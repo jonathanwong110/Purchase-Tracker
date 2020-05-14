@@ -8,6 +8,7 @@ class Purchases {
 
     initiBindingsAndEventListeners() {
         this.purchasesContainer = document.getElementById('purchases-container')
+        this.body = document.querySelector('body')
         this.purchaseSingleDisplay = document.getElementById('purchase-single-display')
         this.newPurchaseTitle = document.getElementById('new-purchase-title')
         this.newPurchasePrice = document.getElementById('new-purchase-price')
@@ -17,7 +18,7 @@ class Purchases {
         this.purchaseForm = document.getElementById('new-purchase-form')
         this.purchaseForm.addEventListener('submit', this.createPurchase.bind(this))
         this.purchasesContainer.addEventListener('dblclick', this.handlePurchaseClick.bind(this))
-        this.purchasesContainer.addEventListener('blur', this.updatePurchase.bind(this), true)
+        this.body.addEventListener('blur', this.updatePurchase.bind(this), true)
         this.purchasesContainer.addEventListener('click', this.deletePurchase.bind(this), true)
         this.purchasesContainer.addEventListener('click', this.showPurchase.bind(this), true)
         this.purchaseSingleDisplay.addEventListener('click', this.closePurchase.bind(this), true)
