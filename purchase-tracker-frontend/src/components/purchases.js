@@ -128,10 +128,9 @@ class Purchases {
         }
     }
 
-
     fetchAndLoadPurchases() {
         this.adapter.getPurchases().then(purchases => {
-            purchases.sort((a, b) => b.id - a.id).forEach(purchase => this.purchases.push(new Purchase(purchase)))
+            purchases.forEach(purchase => this.purchases.push(new Purchase(purchase)))
         })
             .then(() => {
                 this.render()
