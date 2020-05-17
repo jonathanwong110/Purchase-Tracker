@@ -4,11 +4,11 @@ class Api::V1::CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    render json: @comments
+    render json: @comments, status: 200
   end
 
   def show
-    render json: @comment
+    render json: @comment, status: 200
   end
 
   def create
@@ -16,22 +16,19 @@ class Api::V1::CommentsController < ApplicationController
     @purchase = Purchase.find(@comment.purchase_id)
     if @comment.save
       @purchase.comments << @comment
-      render json: @comment, status: :created
-    else
-      render json: @comment.errors, status: :unprocessable_entity
+      render json: @comment, status: 200
     end
   end
 
   def update
     if @comment.update(comment_params)
-      render json: @comment
-    else
-      render json: @comment.errors, status: :unprocessable_entity
+      render json: @comment, status: 200
     end
   end
 
   def destroy
     @comment.destroy
+    render json: {commentId: @comment.id}
   end
 
   private

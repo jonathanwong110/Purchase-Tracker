@@ -71,6 +71,7 @@ class Purchases {
             const id = card.dataset.purchaseId
             this.adapter.deletePurchase(id)
             card.parentElement.remove()
+            window.location.reload()
         }
     }
 
