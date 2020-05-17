@@ -80,6 +80,8 @@ class Purchases {
             const id = parseInt(card.dataset.purchaseId)
             const purchaseOuterDisplay = document.getElementById('purchase-single-display')
             purchaseOuterDisplay.innerHTML = ""
+            const productCommentSubmission = document.getElementById('purchase-comment-submission')
+            productCommentSubmission.innerHTML = ""
             const purchaseInnerDisplay = document.createElement("div")
             purchaseInnerDisplay.setAttribute("id", "purchase-show")
             purchaseInnerDisplay.setAttribute("data-id", highlightedProductId)
@@ -89,12 +91,11 @@ class Purchases {
             purchaseInnerDisplay.innerHTML += (specificPurchase.renderCard(false))
             const commentHeading = `<div id='card-comments-location'>
             </div>`
-            const commentForm = `<form id="new-comment-comment"> 
+            const commentForm = `<form id="new-comment-content"> 
             <input type="text" name="comment-title" id="new-comment-content"> <br></br>
             <input id="create-comment" type="submit" value="Submit Comment">
             </form>`
             purchaseInnerDisplay.innerHTML += commentHeading
-            const productCommentSubmission = document.getElementById('purchase-comment-submission')
             productCommentSubmission.innerHTML += commentForm
             this.displayComments(specificPurchase)
         }

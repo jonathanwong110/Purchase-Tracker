@@ -47,10 +47,11 @@ body {
 }
 
 #purchases-container {
-    float: right;
 	display: flex;
     flex-flow: row wrap;
     max-width: 1500px;
+    margin: auto;
+    width: 60%;
 }
 
 #purchases-content {
@@ -64,4 +65,12 @@ body {
     margin: 40px 10px;
     padding: 8px;
     text-align: center;
+}
+
+.selectable {
+    font-size: 15px;
+}
+
+#card-comments-location {
+    bottom: 10px;
 }
