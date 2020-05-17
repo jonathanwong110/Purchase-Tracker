@@ -10,6 +10,7 @@ class Purchases {
         this.purchasesContainer = document.getElementById('purchases-container')
         this.purchaseSingleDisplay = document.getElementById('purchase-single-display')
         this.commentSubmission = document.getElementById('purchase-comment-submission')
+        this.purchaseClosable = document.getElementById('purchase-closable')
         this.newPurchaseTitle = document.getElementById('new-purchase-title')
         this.newPurchasePrice = document.getElementById('new-purchase-price')
         this.newPurchaseDescription = document.getElementById('new-purchase-description')
@@ -23,6 +24,7 @@ class Purchases {
         this.newCommentContent = document.getElementById('new-comment-content')
         this.commentSubmission.addEventListener('submit', this.createComment.bind(this), true)
         this.purchaseSingleDisplay.addEventListener('click', this.deleteComment.bind(this), true)
+        this.purchaseClosable.addEventListener('click', this.closePurchase.bind(this), true)
     }
 
     handlePurchaseClick(e) {
@@ -75,16 +77,18 @@ class Purchases {
     showPurchase(e) {
         e.preventDefault()
         const card = e.target
-        let highlightedProductId = parseInt(card.parentElement.dataset.id)
+        let highlightedPurchaseId = parseInt(card.parentElement.dataset.id)
         if (card.attributes && card.attributes.class && card.attributes.class.value === "viewable") {
             const id = parseInt(card.dataset.purchaseId)
             const purchaseOuterDisplay = document.getElementById('purchase-single-display')
             purchaseOuterDisplay.innerHTML = ""
-            const productCommentSubmission = document.getElementById('purchase-comment-submission')
-            productCommentSubmission.innerHTML = ""
+            const purchaseCommentSubmission = document.getElementById('purchase-comment-submission')
+            purchaseCommentSubmission.innerHTML = ""
+            const purchaseClosable = document.getElementById('purchase-closable')
+            purchaseClosable.innerHTML = ""
             const purchaseInnerDisplay = document.createElement("div")
             purchaseInnerDisplay.setAttribute("id", "purchase-show")
-            purchaseInnerDisplay.setAttribute("data-id", highlightedProductId)
+            purchaseInnerDisplay.setAttribute("data-id", highlightedPurchaseId)
             purchaseOuterDisplay.appendChild(purchaseInnerDisplay)
             purchaseInnerDisplay.innerHTML += '<h2>Currently Viewing</h2>'
             const specificPurchase = this.purchases.filter(purchase => purchase.id === id)[0]
@@ -95,9 +99,24 @@ class Purchases {
             <input type="text" name="comment-title" id="new-comment-content"> <br></br>
             <input id="create-comment" type="submit" value="Submit Comment">
             </form>`
+            const closableButton = `<br></br> <button class="closable"> Close </button>`
             purchaseInnerDisplay.innerHTML += commentHeading
-            productCommentSubmission.innerHTML += commentForm
+            purchaseCommentSubmission.innerHTML += commentForm
+            purchaseClosable.innerHTML += closableButton
             this.displayComments(specificPurchase)
+        }
+    }
+
+    closePurchase(e) {
+        e.preventDefault()
+        const card = e.target
+        if (card.attributes.class.value === "closable") {
+            const purchaseOuterDisplay = document.getElementById('purchase-single-display')
+            const purchaseCommentSubmission = document.getElementById('purchase-comment-submission')
+            const purchaseClosable = document.getElementById('purchase-closable')
+            purchaseOuterDisplay.innerHTML = ""
+            purchaseCommentSubmission.innerHTML = ""
+            purchaseClosable.innerHTML = ""
         }
     }
 

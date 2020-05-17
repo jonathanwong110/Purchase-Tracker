@@ -24,7 +24,7 @@ body {
 #purchase-single-display {
     padding: 30px;
     position: fixed;
-    bottom: 20px;
+    top: 350px;
     border: 40px;
     left: 16px;
     font-size: 15px;
@@ -32,7 +32,7 @@ body {
 
 #purchase-comment-submission {
     position: fixed;
-    bottom: 2px;
+    top: 1000px;
     left: 45px;
 }
 
@@ -71,6 +71,12 @@ body {
     font-size: 15px;
 }
 
-#card-comments-location {
-    bottom: 10px;
+/* #card-comments-location {
+    bottom: 100px;
+} */
+
+#purchase-closable {
+    position: fixed;
+    bottom: 50px;
+    left: 45px;
 }
