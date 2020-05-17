@@ -10,12 +10,30 @@ body {
     font-size: 20px;
 }
 
+#purchase-show .card img {
+    height: 200px;
+    width: 200px;
+}
+
+#purchase-show .card {
+    position: relative;
+    left: -80px;
+    margin: 0;
+}
+
 #purchase-single-display {
     padding: 30px;
     position: fixed;
-    bottom: 8px;
+    bottom: 20px;
+    border: 40px;
     left: 16px;
     font-size: 15px;
+}
+
+#purchase-comment-submission {
+    position: fixed;
+    bottom: 2px;
+    left: 45px;
 }
 
 #new-purchase-container {

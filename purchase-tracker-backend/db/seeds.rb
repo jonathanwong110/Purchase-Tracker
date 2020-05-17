@@ -22,3 +22,4 @@ Comment.create([
     { content: "testing5", purchase_id: 5}
 ])
 
+

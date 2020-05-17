@@ -9,16 +9,19 @@ class Purchase {
         this.comments = purchaseJSON.comments
     }
 
-    renderCard() {
-        const purchaseCard = `<div class='card' data-id='${this.id}'>
+    renderCard(showButtons = true) {
+        let purchaseCard = `<div class='card' data-id='${this.id}'>
         <img class="selectable" src='${this.image}' height="100" width="100">
         <h2 class="selectable"> ${this.title} </h2>
         <h3 class="selectable"> ${this.price} USD </h3>
-        <b class="selectable"> ${this.description} </b> <br></br>
-        <button class="viewable" data-purchase-id=${this.id}> View More </button>
-        <button class="removable" data-purchase-id=${this.id}> X </button>
-        <br></br>
-        </div>`
+        <b class="selectable"> ${this.description} </b> <br></br>`
+        if (showButtons) {
+            purchaseCard += `<button class="viewable" data-purchase-id=${this.id}> View More </button>
+            <button class="removable" data-purchase-id=${this.id}> X </button>
+            </div>`
+        } else {
+            purchaseCard += `</div>`
+        }
         return purchaseCard
     }
 }

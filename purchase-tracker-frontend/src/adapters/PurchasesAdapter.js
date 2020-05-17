@@ -1,6 +1,7 @@
 class PurchasesAdapter {
     constructor() {
         this.baseUrl = "http://localhost:3000/api/v1/purchases"
+        this.commentBaseUrl = "http://localhost:3000/api/v1/comments"
     }
 
     getPurchases() {
@@ -41,10 +42,31 @@ class PurchasesAdapter {
 
     deletePurchase(id) {
         fetch(`${this.baseUrl}/${id}`, {
-          method: "DELETE",
+            method: "DELETE",
         })
-        .then(response => response.json())
-        .then(response => {return response})
+            .then(response => response.json())
+            .then(response => { return response })
+    }
+
+    createComment(newCommentContent, purchaseIdValue) {
+        const comment = {
+            content: newCommentContent,
+            purchase_id: purchaseIdValue
+        }
+        return fetch(this.commentBaseUrl, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ comment }),
+        }).then(res => res.json())
+    }
+
+    deleteComment(id) {
+        fetch(`${this.commentBaseUrl}/${id}`, {
+            method: "DELETE",
+        }).then(response => response.json())
+            .then(response => { return response })
     }
 
 }
